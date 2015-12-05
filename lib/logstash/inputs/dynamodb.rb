@@ -157,6 +157,9 @@ class LogStash::Inputs::DynamoDB < LogStash::Inputs::Base
 
     #Create DynamoDB Client
     @client_configuration = AmazonDynamoDB::ClientConfiguration.new()
+    @client_configuration.setProxyHost("awsproxy");
+    @client_configuration.setProxyPort(8080);
+
     @client_configuration.setUserAgent(@client_configuration.getUserAgent() + USER_AGENT)
     @dynamodb_client = AmazonDynamoDB::AmazonDynamoDBClient.new(@credentials, @client_configuration)
 
